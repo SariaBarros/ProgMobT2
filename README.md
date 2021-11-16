@@ -1,5 +1,9 @@
 # ProgWebT2
 
+Grupo:
+- Enzo Gaban
+- Sandy Barros
+
 O aplicativo será uma rede social de livros que permitirá ao usuário:
 
 - Acompanhar o tempo de leitura
