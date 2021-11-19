@@ -9,14 +9,40 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  String email = '';
-  String senha = '';
+  final _emailController = TextEditingController();
+  String _email = '';
+  final _senhaController = TextEditingController();
+  String _senha = '';
+
+  @override
+  void initState() {
+    _emailController.addListener(() {
+      setState(() {
+        _email = _emailController.text;
+      });
+    });
+
+    _senhaController.addListener(() {
+      setState(() {
+        _senha = _senhaController.text;
+      });
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _senhaController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Reading Count'),
+          title: const Text('Reading Count'),
           backgroundColor: Colors.purple.shade200,
         ),
         body: SafeArea(
@@ -36,51 +62,57 @@ class _LoginState extends State<Login> {
                     color: Colors.purple.shade200,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 TextField(
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(),
                   ),
+                  controller: _emailController,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 TextField(
+                  controller: _senhaController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Senha',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 80,
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Login'),
+                  child: const Text('Login'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.purple.shade200,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 100,
+                      vertical: 15,
+                    ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Cadastro'),
+                  child: const Text('Cadastro'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,
                     onPrimary: Colors.purple.shade200,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 100,
+                      vertical: 15,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),

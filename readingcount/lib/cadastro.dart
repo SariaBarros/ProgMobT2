@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:readingcount/login.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({Key? key}) : super(key: key);
@@ -12,18 +9,51 @@ class Cadastro extends StatefulWidget {
 }
 
 class _CadastroState extends State<Cadastro> {
-  String nome = '';
-  String email = '';
-  String senha = '';
+  String _nome = '';
+  String _email = '';
+  String _senha = '';
+  final _nomeController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _senhaController = TextEditingController();
+
+  @override
+  void initState() {
+    _nomeController.addListener(() {
+      setState(() {
+        _nome = _nomeController.text;
+      });
+    });
+
+    _emailController.addListener(() {
+      setState(() {
+        _email = _emailController.text;
+      });
+    });
+
+    _senhaController.addListener(() {
+      setState(() {
+        _senha = _senhaController.text;
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _nomeController.dispose();
+    _emailController.dispose();
+    _senhaController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Reading Count'),
+          title: const Text('Reading Count'),
           automaticallyImplyLeading: true,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context, false),
           ),
           backgroundColor: Colors.purple.shade400,
@@ -45,56 +75,53 @@ class _CadastroState extends State<Cadastro> {
                     color: Colors.purple.shade400,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 TextField(
-                  onChanged: (text) {
-                    nome = text;
-                  },
-                  decoration: InputDecoration(
+                  controller: _nomeController,
+                  decoration: const InputDecoration(
                     labelText: 'Nome',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 TextField(
-                  onChanged: (text) {
-                    email = text;
-                  },
+                  controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 TextField(
-                  onChanged: (text) {
-                    senha = text;
-                  },
+                  controller: _senhaController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Senha',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 70,
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Registrar'),
+                  child: const Text('Registrar'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.purple.shade400,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 100, vertical: 15),
                   ),
-                )
+                ),
+                Text(_email),
+                Text(_nome),
+                Text(_senha)
               ],
             ),
           ),

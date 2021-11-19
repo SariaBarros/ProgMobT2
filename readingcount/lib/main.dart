@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         primary: Colors.black,
         secondary: Colors.pink,
       )),
-      home: Cadastro(),
+      home: const Cadastro(),
       // home: const MyHomePage(
       //   title: 'Reading Count',
       // ),
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ReadindCount'),
+        title: const Text('ReadindCount'),
       ),
       body: SafeArea(
         child: Container(),
