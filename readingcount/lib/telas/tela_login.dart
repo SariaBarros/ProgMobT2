@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class TelaLogin extends StatefulWidget {
+  final void Function(bool) setTocouRegistro;
+
+  const TelaLogin({Key? key, required this.setTocouRegistro}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _TelaLoginState createState() => _TelaLoginState();
 }
 
-class _LoginState extends State<Login> {
+class _TelaLoginState extends State<TelaLogin> {
   final _emailController = TextEditingController();
   String _email = '';
   final _senhaController = TextEditingController();
@@ -102,7 +104,9 @@ class _LoginState extends State<Login> {
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    widget.setTocouRegistro(true);
+                  },
                   child: const Text('Cadastro'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,

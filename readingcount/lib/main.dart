@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'cadastro.dart';
-import 'login.dart';
+import 'telas/telas.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _tocouRegistro = false;
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
@@ -21,32 +26,30 @@ class MyApp extends StatelessWidget {
         primary: Colors.black,
         secondary: Colors.pink,
       )),
-      home: const Cadastro(),
-      // home: const MyHomePage(
-      //   title: 'Reading Count',
-      // ),
+      home: Navigator(
+        pages: [
+          MaterialPage(
+            child: TelaLogin(
+              setTocouRegistro: _setTocouRegistro,
+            ),
+          ),
+          if (_tocouRegistro)
+            MaterialPage(
+              child: TelaCadastro(
+                setTocouRegistro: _setTocouRegistro,
+              ),
+            ),
+        ],
+        onPopPage: (route, result) {
+          return route.didPop(result);
+        },
+      ),
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ReadindCount'),
-      ),
-      body: SafeArea(
-        child: Container(),
-      ),
-    );
+  void _setTocouRegistro(bool valor) {
+    setState(() {
+      _tocouRegistro = valor;
+    });
   }
 }

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Cadastro extends StatefulWidget {
-  const Cadastro({Key? key}) : super(key: key);
+class TelaCadastro extends StatefulWidget {
+  final void Function(bool) setTocouRegistro;
+
+  const TelaCadastro({Key? key, required this.setTocouRegistro})
+      : super(key: key);
 
   @override
-  _CadastroState createState() => _CadastroState();
+  _TelaCadastroState createState() => _TelaCadastroState();
 }
 
-class _CadastroState extends State<Cadastro> {
+class _TelaCadastroState extends State<TelaCadastro> {
   String _nome = '';
   String _email = '';
   String _senha = '';
@@ -54,7 +57,9 @@ class _CadastroState extends State<Cadastro> {
           automaticallyImplyLeading: true,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context, false),
+            onPressed: () {
+              widget.setTocouRegistro(false);
+            },
           ),
           backgroundColor: Colors.purple.shade400,
         ),
