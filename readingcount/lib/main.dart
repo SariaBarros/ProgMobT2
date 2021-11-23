@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:readingcount/telas/home.dart';
 import 'telas/telas.dart';
 
 void main() {
@@ -26,30 +27,31 @@ class _MyAppState extends State<MyApp> {
         primary: Colors.black,
         secondary: Colors.pink,
       )),
-      home: Navigator(
-        pages: [
-          MaterialPage(
-            child: TelaLogin(
-              setTocouRegistro: _setTocouRegistro,
-            ),
-          ),
-          if (_tocouRegistro)
-            MaterialPage(
-              child: TelaCadastro(
-                setTocouRegistro: _setTocouRegistro,
-              ),
-            ),
-        ],
-        onPopPage: (route, result) {
-          return route.didPop(result);
-        },
-      ),
+      home: const Home(),
+      // Navigator(
+      //   pages: [
+      //     MaterialPage(
+      //       child: TelaLogin(
+      //         setTocouRegistro: _setTocouRegistro,
+      //       ),
+      //     ),
+      //     if (_tocouRegistro)
+      //       MaterialPage(
+      //         child: TelaCadastro(
+      //           setTocouRegistro: _setTocouRegistro,
+      //         ),
+      //       ),
+      //   ],
+      //   onPopPage: (route, result) {
+      //     return route.didPop(result);
+      //   },
+      // ),
     );
   }
 
-  void _setTocouRegistro(bool valor) {
-    setState(() {
-      _tocouRegistro = valor;
-    });
-  }
+  // void _setTocouRegistro(bool valor) {
+  //   setState(() {
+  //     _tocouRegistro = valor;
+  //   });
+  // }
 }
