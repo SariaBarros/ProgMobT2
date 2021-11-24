@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:readingcount/telas/cronometro.dart';
 
 class TelaHome extends StatelessWidget {
   const TelaHome({Key? key}) : super(key: key);
@@ -47,15 +48,6 @@ class TelaHome extends StatelessWidget {
             height: 50,
           ),
           buildTemporizador(),
-          // Container(
-          //   height: 200,
-          //   decoration: BoxDecoration(
-          //     border: Border.all(
-          //       color: Colors.grey,
-          //     ),
-          //     borderRadius: BorderRadius.circular(5),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -69,7 +61,7 @@ class TelaHome extends StatelessWidget {
       );
 
   Widget buildTemporizador() => Container(
-        height: 200,
+        height: 250,
         width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(
@@ -78,15 +70,16 @@ class TelaHome extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              'Iniciar sessão de leitura',
+              'INICIAR SESSÃO DE LEITURA',
               textAlign: TextAlign.start,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            Text(
-              'Stopwatch aqui que eu ainda não me dei ao trabalho de aprender a fazer :) XOXO',
-              textAlign: TextAlign.start,
-            ),
+            Cronometro(),
           ],
         ),
       );
