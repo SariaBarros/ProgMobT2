@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:readingcount/telas/tela_lista_leitura.dart';
+
 import 'telas.dart';
+import '../navigation/rotas.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
+
+  static MaterialPage page() {
+    return MaterialPage(
+      name: Rotas.home,
+      key: ValueKey(Rotas.home),
+      child: const Home(),
+    );
+  }
 }
 
 class _HomeState extends State<Home> {

@@ -100,7 +100,9 @@ class _TelaLoginState extends State<TelaLogin> {
                   height: 80,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Provider.of<LoginManager>(context, listen: false).login();
+                  },
                   child: const Text('Login'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.purple.shade200,

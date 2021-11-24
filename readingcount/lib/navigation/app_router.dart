@@ -28,7 +28,9 @@ class AppRouter extends RouterDelegate
       key: navigatorKey,
       pages: [
         if (!loginManager.logado) TelaLogin.page(),
-        if (loginManager.tocouCadastro) TelaCadastro.page(),
+        if (!loginManager.logado && loginManager.tocouCadastro)
+          TelaCadastro.page(),
+        if (loginManager.logado) Home.page(),
       ],
       onPopPage: _handlePopPage,
     );
