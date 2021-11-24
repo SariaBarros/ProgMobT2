@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+import '../models/models.dart';
+import '../navigation/rotas.dart';
 
 class TelaCadastro extends StatefulWidget {
-  final void Function(bool) setTocouRegistro;
-
-  const TelaCadastro({Key? key, required this.setTocouRegistro})
-      : super(key: key);
+  const TelaCadastro({Key? key}) : super(key: key);
 
   @override
   _TelaCadastroState createState() => _TelaCadastroState();
+
+  static MaterialPage page() {
+    return MaterialPage(
+      name: Rotas.cadastro,
+      key: ValueKey(Rotas.cadastro),
+      child: const TelaCadastro(),
+    );
+  }
 }
 
 class _TelaCadastroState extends State<TelaCadastro> {
@@ -58,7 +67,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              widget.setTocouRegistro(false);
+              Provider.of<LoginManager>(context, listen: false).sairCadastro();
             },
           ),
           backgroundColor: Colors.purple.shade400,

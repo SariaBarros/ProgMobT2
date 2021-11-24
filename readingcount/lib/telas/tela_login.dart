@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+import '../models/models.dart';
+import '../navigation/rotas.dart';
 
 class TelaLogin extends StatefulWidget {
-  final void Function(bool) setTocouRegistro;
-
-  const TelaLogin({Key? key, required this.setTocouRegistro}) : super(key: key);
+  const TelaLogin({Key? key}) : super(key: key);
 
   @override
   _TelaLoginState createState() => _TelaLoginState();
+
+  static MaterialPage page() {
+    return MaterialPage(
+      name: Rotas.login,
+      key: ValueKey(Rotas.login),
+      child: const TelaLogin(),
+    );
+  }
 }
 
 class _TelaLoginState extends State<TelaLogin> {
@@ -105,7 +115,8 @@ class _TelaLoginState extends State<TelaLogin> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    widget.setTocouRegistro(true);
+                    Provider.of<LoginManager>(context, listen: false)
+                        .irParaCadastro();
                   },
                   child: const Text('Cadastro'),
                   style: ElevatedButton.styleFrom(
