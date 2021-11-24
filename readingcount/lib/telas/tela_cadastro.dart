@@ -61,84 +61,73 @@ class _TelaCadastroState extends State<TelaCadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Reading Count'),
-          automaticallyImplyLeading: true,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Provider.of<LoginManager>(context, listen: false).sairCadastro();
-            },
-          ),
-          backgroundColor: Colors.purple.shade400,
-        ),
         body: SafeArea(
             child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'CADASTRO',
-                  style: TextStyle(
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.purple.shade400,
-                  ),
-                ),
-                const SizedBox(
-                  height: 100,
-                ),
-                TextField(
-                  controller: _nomeController,
-                  decoration: const InputDecoration(
-                    labelText: 'Nome',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextField(
-                  controller: _senhaController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Senha',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 70,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Registrar'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.purple.shade400,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 100, vertical: 15),
-                  ),
-                ),
-                Text(_email),
-                Text(_nome),
-                Text(_senha)
-              ],
+      width: double.infinity,
+      height: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Cadastro',
+              style: TextStyle(
+                fontSize: 50.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.purple.shade400,
+              ),
             ),
-          ),
-        )));
+            const SizedBox(
+              height: 100,
+            ),
+            TextField(
+              controller: _nomeController,
+              decoration: const InputDecoration(
+                labelText: 'Nome',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            TextField(
+              controller: _senhaController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Senha',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(
+              height: 70,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Provider.of<LoginManager>(context, listen: false)
+                    .cadastrar(_emailController.text, _senhaController.text);
+              },
+              child: const Text('Registrar'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.purple.shade400,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+              ),
+            ),
+          ],
+        ),
+      ),
+    )));
   }
 }
