@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "781059984340",
+    "project_id": "readingapp-7f785",
+    "storage_bucket": "readingapp-7f785.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781059984340:android:44b401622a2af197386441",
+        "android_client_info": {
+          "package_name": "com.example.readingcount"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781059984340-gnc6gksra4uh5dcehdfg9sea2teem81l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZaCDROMclIIQEUu2WLWPcbAV89UPEi58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781059984340-gnc6gksra4uh5dcehdfg9sea2teem81l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "781059984340-rn8ru3qamo6fi8pf563q79kfugjj7ghe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.enzogaban.readingapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
