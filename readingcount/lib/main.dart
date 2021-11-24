@@ -16,11 +16,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _loginManager = LoginManager();
+  final _appStateManager = AppStateManager();
   late AppRouter _appRouter;
 
   @override
   void initState() {
-    _appRouter = AppRouter(loginManager: _loginManager);
+    _appRouter = AppRouter(
+      loginManager: _loginManager,
+      appStateManager: _appStateManager,
+    );
     super.initState();
   }
 
@@ -28,8 +32,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
 
-    return ChangeNotifierProvider(
-      create: (context) => _loginManager,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => _loginManager),
+        ChangeNotifierProvider(create: (context) => _appStateManager)
+      ],
       child: MaterialApp(
         title: 'ReadingCount',
         theme: theme.copyWith(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'telas.dart';
 import '../navigation/rotas.dart';
+import '../models/models.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,45 +21,43 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
-
   static List<Widget> pages = <Widget>[
-    //tela 1
-    TelaHome(),
-    //tela 2
+    const TelaHome(),
     TelaListaLeitura(),
-    //tela 3
-    TelaEstatistica(),
+    const TelaEstatistica(),
   ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.purple
-            .shade200, //Theme.of(context).textSelectionTheme.selectionColor,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Home'),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.book), label: 'Lista de leitura'),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.analytics), label: 'Estatística'),
-        ],
-      ),
-    );
+    return Consumer<AppStateManager>(
+        builder: (context, appStateManager, child) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        body: pages[appStateManager.abaSelecionada],
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.purple
+              .shade200, //Theme.of(context).textSelectionTheme.selectionColor,
+          currentIndex: appStateManager.abaSelecionada,
+          onTap: appStateManager.irParaAba,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.house),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.book),
+              label: 'Lista de leitura',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.analytics),
+              label: 'Estatística',
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

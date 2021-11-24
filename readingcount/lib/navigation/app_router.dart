@@ -10,15 +10,20 @@ class AppRouter extends RouterDelegate
   final GlobalKey<NavigatorState> navigatorKey;
 
   final LoginManager loginManager;
+  final AppStateManager appStateManager;
 
-  AppRouter({required this.loginManager})
-      : navigatorKey = GlobalKey<NavigatorState>() {
+  AppRouter({
+    required this.loginManager,
+    required this.appStateManager,
+  }) : navigatorKey = GlobalKey<NavigatorState>() {
     loginManager.addListener(notifyListeners);
+    appStateManager.addListener(notifyListeners);
   }
 
   @override
   void dispose() {
     loginManager.removeListener(notifyListeners);
+    appStateManager.removeListener(notifyListeners);
     super.dispose();
   }
 
