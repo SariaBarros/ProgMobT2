@@ -36,6 +36,7 @@ class AppRouter extends RouterDelegate
         if (!loginManager.logado && loginManager.tocouCadastro)
           TelaCadastro.page(),
         if (loginManager.logado) Home.page(),
+        if (appStateManager.exibirCadastroLivro) TelaCadastroLivro.page(),
       ],
       onPopPage: _handlePopPage,
     );
@@ -48,6 +49,10 @@ class AppRouter extends RouterDelegate
 
     if (route.settings.name == Rotas.cadastro) {
       loginManager.sairCadastro();
+    }
+
+    if (route.settings.name == Rotas.cadastroLivro) {
+      appStateManager.setTocouCadastroLivro(false);
     }
 
     return true;

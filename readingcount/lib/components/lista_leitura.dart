@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/models.dart';
 
 class ListaLeitura extends StatelessWidget {
@@ -24,7 +25,10 @@ class ListaLeitura extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<AppStateManager>(context, listen: false)
+                      .setTocouCadastroLivro(true);
+                },
                 icon: const Icon(Icons.add),
               )
             ],

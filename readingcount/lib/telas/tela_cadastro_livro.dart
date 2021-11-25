@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../navigation/rotas.dart';
+import '../models/models.dart';
 
 class TelaCadastroLivro extends StatefulWidget {
   const TelaCadastroLivro({Key? key}) : super(key: key);
 
   @override
   _TelaCadastroLivroState createState() => _TelaCadastroLivroState();
+
+  static MaterialPage page() {
+    return MaterialPage(
+      name: Rotas.cadastroLivro,
+      key: ValueKey(Rotas.cadastroLivro),
+      child: const TelaCadastroLivro(),
+    );
+  }
 }
 
 class _TelaCadastroLivroState extends State<TelaCadastroLivro> {
@@ -14,7 +26,10 @@ class _TelaCadastroLivroState extends State<TelaCadastroLivro> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            Provider.of<AppStateManager>(context, listen: false)
+                .setTocouCadastroLivro(false);
+          },
         ),
         backgroundColor: Colors.purple.shade200,
       ),
