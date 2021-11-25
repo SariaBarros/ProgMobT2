@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'models/livro_dao.dart';
 import 'models/models.dart';
 import 'navigation/app_router.dart';
 
@@ -38,7 +39,8 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => _loginManager),
-        ChangeNotifierProvider(create: (context) => _appStateManager)
+        ChangeNotifierProvider(create: (context) => _appStateManager),
+        Provider<LivroDAO>(create: (context) => LivroDAO()),
       ],
       child: MaterialApp(
         title: 'ReadingCount',

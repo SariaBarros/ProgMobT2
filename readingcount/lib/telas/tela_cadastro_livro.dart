@@ -20,6 +20,16 @@ class TelaCadastroLivro extends StatefulWidget {
 }
 
 class _TelaCadastroLivroState extends State<TelaCadastroLivro> {
+  final _tituloController = TextEditingController();
+  final _autorController = TextEditingController();
+
+  @override
+  void dispose() {
+    _tituloController.dispose();
+    _autorController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +51,9 @@ class _TelaCadastroLivroState extends State<TelaCadastroLivro> {
             children: [
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.only(top: 30),
-                child: Text(
-                  'NOVO LIVRO',
+                padding: const EdgeInsets.only(top: 30),
+                child: const Text(
+                  'Novo livro',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -51,40 +61,49 @@ class _TelaCadastroLivroState extends State<TelaCadastroLivro> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Container(
+              SizedBox(
                 child: Column(
                   children: [
                     TextField(
+                      controller: _tituloController,
                       decoration: const InputDecoration(
                         labelText: 'Nome do Livro',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     TextField(
+                      controller: _autorController,
                       decoration: const InputDecoration(
                         labelText: 'Autor',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    Text('Foto aqui')
+                    const Text('Foto aqui')
                   ],
                 ),
               ),
-              Container(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Registrar'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.purple.shade200,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 100, vertical: 15),
-                  ),
+              ElevatedButton(
+                onPressed: () {
+                  Livro livro = Livro(
+                    autor: _autorController.text,
+                    titulo: _tituloController.text,
+                  );
+                  Provider.of<LivroDAO>(context, listen: false)
+                      .salvarLivro(livro);
+                  Provider.of<AppStateManager>(context, listen: false)
+                      .setTocouCadastroLivro(false);
+                },
+                child: const Text('Registrar'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.purple.shade200,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               )
             ],
