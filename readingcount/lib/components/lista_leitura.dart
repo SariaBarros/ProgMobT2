@@ -57,22 +57,15 @@ class ListaLeitura extends StatelessWidget {
       return const Text("Nenhum livro cadastrado");
     }
 
-    return SizedBox(
-      height: 350,
-      child: ListView.separated(
-        scrollDirection: Axis.vertical,
-        itemCount: livros.length,
-        separatorBuilder: (context, _) => const SizedBox(
-          height: 5,
-        ),
-        itemBuilder: (context, index) =>
-            _buildCard(Livro.fromSnapshot(livros[index])),
-      ),
+    return Column(
+      children:
+          livros.map((livro) => _buildCard(Livro.fromSnapshot(livro))).toList(),
     );
   }
 
   Widget _buildCard(Livro livro) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
       child: Text(livro.titulo),
       decoration: BoxDecoration(
