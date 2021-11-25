@@ -21,34 +21,9 @@ class TelaCadastro extends StatefulWidget {
 }
 
 class _TelaCadastroState extends State<TelaCadastro> {
-  String _nome = '';
-  String _email = '';
-  String _senha = '';
   final _nomeController = TextEditingController();
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
-
-  @override
-  void initState() {
-    _nomeController.addListener(() {
-      setState(() {
-        _nome = _nomeController.text;
-      });
-    });
-
-    _emailController.addListener(() {
-      setState(() {
-        _email = _emailController.text;
-      });
-    });
-
-    _senhaController.addListener(() {
-      setState(() {
-        _senha = _senhaController.text;
-      });
-    });
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -115,8 +90,11 @@ class _TelaCadastroState extends State<TelaCadastro> {
             ),
             ElevatedButton(
               onPressed: () {
-                Provider.of<LoginManager>(context, listen: false)
-                    .cadastrar(_emailController.text, _senhaController.text);
+                final loginManager =
+                    Provider.of<LoginManager>(context, listen: false);
+
+                loginManager.cadastrar(_nomeController.text,
+                    _emailController.text, _senhaController.text);
               },
               child: const Text('Registrar'),
               style: ElevatedButton.styleFrom(

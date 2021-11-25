@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../telas/cronometro.dart';
@@ -8,19 +9,24 @@ class TelaHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final usuario =
+        Provider.of<LoginManager>(context, listen: false).getUsuario();
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Text(
-            'Olá nome!',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-          ),
+          const SizedBox(height: 64.0),
+          StreamBuilder<QuerySnapshot>(
+              stream: usuario,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return _buildGreeting(snapshot.data!.docs.first);
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
           const SizedBox(
             height: 40,
           ),
@@ -62,12 +68,21 @@ class TelaHome extends StatelessWidget {
     );
   }
 
-//temporario
   Widget buildCard() => Container(
         width: 150,
         height: 100,
         color: Colors.purple.shade200,
       );
+
+  Widget _buildGreeting(DocumentSnapshot snapshot) {
+    return Text(
+      "Olá " + Usuario.fromSnapshot(snapshot).nome + "!",
+      style: const TextStyle(
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
 
   Widget buildTemporizador() => Container(
         height: 250,
