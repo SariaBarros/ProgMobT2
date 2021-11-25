@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:readingcount/telas/cronometro.dart';
+import 'package:provider/provider.dart';
+import '../telas/cronometro.dart';
+import '../models/models.dart';
 
 class TelaHome extends StatelessWidget {
   const TelaHome({Key? key}) : super(key: key);
@@ -7,22 +9,22 @@ class TelaHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            'OLÁ NOME!',
+          const Text(
+            'Olá nome!',
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
-          Text(
+          const Text(
             'Selecione o livro que você vai ler :)',
             textAlign: TextAlign.left,
             style: TextStyle(
@@ -30,24 +32,31 @@ class TelaHome extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Container(
+          SizedBox(
             height: 100,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
-              separatorBuilder: (context, _) => SizedBox(
+              separatorBuilder: (context, _) => const SizedBox(
                 width: 8,
               ),
               itemBuilder: (context, index) => buildCard(),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           buildTemporizador(),
+          const SizedBox(height: 50.0),
+          OutlinedButton(
+            child: const Text("Logout"),
+            onPressed: () {
+              Provider.of<LoginManager>(context, listen: false).logout();
+            },
+          ),
         ],
       ),
     );

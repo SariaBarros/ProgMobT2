@@ -38,6 +38,11 @@ class LoginManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  void logout() async {
+    await _auth.signOut();
+    notifyListeners();
+  }
+
   void irParaCadastro() {
     _tocouCadastro = true;
     notifyListeners();
