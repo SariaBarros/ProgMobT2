@@ -3,3 +3,4 @@ export 'app_state_manager.dart';
 export 'livro.dart';
 export 'livro_dao.dart';
 export 'usuario.dart';
+export 'livro_novo.dart';

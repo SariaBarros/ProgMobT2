@@ -8,9 +8,11 @@ class LoginManager extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
   final CollectionReference _usuarioCollection =
       FirebaseFirestore.instance.collection('usuarios');
+  Usuario? _usuario;
 
   bool get logado => _auth.currentUser != null;
   bool get tocouCadastro => _tocouCadastro;
+  Usuario? get usuario => _usuario;
 
   void cadastrar(String nome, String email, String senha) async {
     try {
@@ -20,6 +22,7 @@ class LoginManager extends ChangeNotifier {
       );
 
       _criarUsuario(nome);
+      _carregarUsuario();
     } on FirebaseAuthException catch (e) {
       print(e);
     } catch (e) {
@@ -34,7 +37,7 @@ class LoginManager extends ChangeNotifier {
         email: email,
         password: senha,
       );
-      notifyListeners();
+      _carregarUsuario();
     } on FirebaseAuthException catch (e) {
       print(e);
     } catch (e) {
@@ -67,10 +70,13 @@ class LoginManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  Stream<QuerySnapshot> getUsuario() {
+  void _carregarUsuario() async {
     Query query = _usuarioCollection
         .where("uid", isEqualTo: _auth.currentUser!.uid)
         .limit(1);
-    return query.snapshots();
+    final querySnapshot = await query.snapshots().first;
+    final snapshot = querySnapshot.docs.first;
+    _usuario = Usuario.fromSnapshot(snapshot);
+    notifyListeners();
   }
 }
