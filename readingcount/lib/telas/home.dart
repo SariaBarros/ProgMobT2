@@ -32,10 +32,6 @@ class _HomeState extends State<Home> {
     return Consumer<AppStateManager>(
         builder: (context, appStateManager, child) {
       return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-        ),
         body: pages[appStateManager.abaSelecionada],
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.purple

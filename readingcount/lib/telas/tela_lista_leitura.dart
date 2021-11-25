@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:readingcount/livro.dart';
+import '../components/lista_lidos.dart';
+import '../components/lista_leitura.dart';
+import '../models/models.dart';
 
 class TelaListaLeitura extends StatelessWidget {
   TelaListaLeitura({Key? key}) : super(key: key);
 
-  List<Livro> livros = [
+  final List<Livro> livros = [
     Livro(nome: 'nome1', autor: 'autor1'),
     Livro(nome: 'nome2', autor: 'autor2'),
     Livro(nome: 'nome3', autor: 'autor3'),
@@ -16,79 +18,11 @@ class TelaListaLeitura extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
-        Container(
-          height: 450,
-          width: double.infinity,
-          child: Column(
-            children: [
-              Text(
-                'LISTA DE LEITURA',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 380,
-                child: ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  itemCount: livros.length,
-                  separatorBuilder: (context, _) => SizedBox(
-                    height: 5,
-                  ),
-                  itemBuilder: (context, index) => buildCard(livros[index]),
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          height: 200,
-          width: double.infinity,
-          child: Column(
-            children: [
-              Text(
-                'LIVROS LIDOS',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 150,
-                child: ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  itemCount: livros.length,
-                  separatorBuilder: (context, _) => SizedBox(
-                    height: 5,
-                  ),
-                  itemBuilder: (context, index) => buildCard(livros[index]),
-                ),
-              )
-            ],
-          ),
-        ),
+        ListaLeitura(livros: livros),
+        ListaLidos(livros: livros),
       ],
     );
   }
-
-  Widget buildCard(Livro livro) => Container(
-        width: double.infinity,
-        height: 70,
-        padding: EdgeInsets.all(10),
-        child: Text(livro.nome),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(color: Colors.grey.shade200),
-          ),
-        ),
-      );
 }
