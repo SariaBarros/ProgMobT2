@@ -90,6 +90,10 @@ class _TelaCadastroLivroState extends State<TelaCadastroLivro> {
                   Livro livro = Livro(
                     autor: _autorController.text,
                     titulo: _tituloController.text,
+                    usuarioUid:
+                        Provider.of<LoginManager>(context, listen: false)
+                            .usuario!
+                            .uid,
                   );
                   Provider.of<LivroDAO>(context, listen: false)
                       .salvarLivro(livro);

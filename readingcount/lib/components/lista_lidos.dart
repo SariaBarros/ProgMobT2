@@ -10,6 +10,7 @@ class ListaLidos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final livroDAO = Provider.of<LivroDAO>(context, listen: false);
+    final loginManager = Provider.of<LoginManager>(context, listen: false);
 
     return Column(
       children: [
@@ -25,7 +26,7 @@ class ListaLidos extends StatelessWidget {
           height: 10,
         ),
         StreamBuilder<QuerySnapshot>(
-          stream: livroDAO.getLivros(),
+          stream: livroDAO.getLivrosUsuario(loginManager.uid!),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return const CircularProgressIndicator();
@@ -45,15 +46,41 @@ class ListaLidos extends StatelessWidget {
 
     return Column(
         children: livros
-            .map((livro) => _buildCard(Livro.fromSnapshot(livro)))
+            .where((livro) => livro.get('lido'))
+            .map((livro) => _buildCard(livro))
             .toList());
   }
 
-  Widget _buildCard(Livro livro) {
+  Widget _buildCard(DocumentSnapshot livro) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
-      child: Text(livro.titulo),
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                livro.get('titulo'),
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16.0,
+                ),
+              ),
+              Text(
+                livro.get('autor'),
+                style: const TextStyle(fontWeight: FontWeight.w300),
+              ),
+            ],
+          ),
+          Checkbox(
+              value: livro.get('lido'),
+              onChanged: (valor) {
+                livro.reference.update({"lido": valor});
+              })
+        ],
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      ),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.grey.shade200),

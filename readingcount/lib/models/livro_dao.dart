@@ -12,4 +12,8 @@ class LivroDAO {
   Stream<QuerySnapshot> getLivros() {
     return collection.snapshots();
   }
+
+  Stream<QuerySnapshot> getLivrosUsuario(String usuarioUid) {
+    return collection.where('usuarioUid', isEqualTo: usuarioUid).snapshots();
+  }
 }
