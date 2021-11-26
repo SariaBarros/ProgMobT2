@@ -58,11 +58,27 @@ class TelaHome extends StatelessWidget {
     );
   }
 
-  Widget buildCard() => Container(
-        width: 150,
-        height: 100,
+  Widget buildCard() => Material(
         color: Colors.purple.shade200,
+        child: InkWell(
+            onTap: () => {
+                  print('oiii'),
+                },
+            child: Container(
+              width: 150,
+              height: 100,
+            )),
       );
+  // Widget buildCard() => Container(
+  //       width: 150,
+  //       height: 100,
+  //       color: Colors.purple.shade200,
+  //       child: GestureDetector(
+  //         onTap: () {
+  //           print('oi');
+  //         },
+  //       ),
+  //     );
 
   Widget _buildGreeting(Usuario? usuario) {
     if (usuario == null) {
@@ -89,7 +105,7 @@ class TelaHome extends StatelessWidget {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+          children: const [
             Text(
               'INICIAR SESSÃO DE LEITURA',
               textAlign: TextAlign.start,
