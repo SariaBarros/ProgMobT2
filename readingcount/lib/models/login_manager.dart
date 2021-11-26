@@ -12,8 +12,21 @@ class LoginManager extends ChangeNotifier {
 
   bool get logado => _auth.currentUser != null;
   bool get tocouCadastro => _tocouCadastro;
-  Usuario? get usuario => _usuario;
-  String? get uid => _usuario?.uid;
+  Usuario? get usuario {
+    if (_usuario == null && _auth.currentUser != null) {
+      _carregarUsuario();
+    }
+
+    return _usuario;
+  }
+
+  String? get uid {
+    if (_usuario == null && _auth.currentUser != null) {
+      _carregarUsuario();
+    }
+
+    return _usuario?.uid;
+  }
 
   void cadastrar(String nome, String email, String senha) async {
     try {

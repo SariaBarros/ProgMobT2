@@ -81,7 +81,6 @@ class _TelaCadastroLivroState extends State<TelaCadastroLivro> {
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    const Text('Foto aqui')
                   ],
                 ),
               ),

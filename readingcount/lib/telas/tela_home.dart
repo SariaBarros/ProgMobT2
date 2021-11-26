@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../telas/cronometro.dart';
@@ -8,6 +9,7 @@ class TelaHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final livroDAO = Provider.of<LivroDAO>(context);
     final loginManager = Provider.of<LoginManager>(context);
 
     return ListView(children: [
@@ -32,17 +34,9 @@ class TelaHome extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              height: 100,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                separatorBuilder: (context, _) => const SizedBox(
-                  width: 8,
-                ),
-                itemBuilder: (context, index) => buildCard(),
-              ),
-            ),
+            loginManager.uid != null
+                ? _buildCards(livroDAO.getLivrosNaoLidos(loginManager.uid!))
+                : const CircularProgressIndicator(),
             const SizedBox(
               height: 50,
             ),
@@ -119,4 +113,61 @@ class TelaHome extends StatelessWidget {
           ],
         ),
       );
+
+  Widget _buildCards(Stream<QuerySnapshot> livros) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: livros,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data!.docs.isEmpty) {
+            return const Center(
+                child: Text("Nenhum livro na lista de leitura."));
+          }
+
+          return SizedBox(
+            height: 100,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) => _buildCardLivro(
+                  Livro.fromSnapshot(snapshot.data!.docs[index])),
+              separatorBuilder: (context, index) => const SizedBox(
+                width: 20.0,
+              ),
+            ),
+          );
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
+    );
+  }
+
+  Widget _buildCardLivro(Livro livro) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            livro.titulo,
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+              fontSize: 16.0,
+            ),
+          ),
+          Text(
+            livro.autor,
+            style: const TextStyle(
+                fontWeight: FontWeight.w300, color: Colors.white),
+          ),
+        ],
+      ),
+      width: 150.0,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        color: Colors.purple,
+      ),
+    );
+  }
 }

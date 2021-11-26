@@ -6,50 +6,36 @@ class TelaEstatistica extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'ESTATÍSTICAS DE LEITURA',
+            const SizedBox(height: 48),
+            const Text(
+              'Estatísticas de leitura',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
               height: 150,
               width: double.infinity,
-              child: Text('Estatistica aqui'),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text('Total de livros lidos',
+                        style: TextStyle(fontSize: 24)),
+                    Text('40',
+                        style: TextStyle(
+                            fontSize: 48, fontWeight: FontWeight.bold)),
+                  ],
                 ),
-                borderRadius: BorderRadius.circular(5),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Container(
-              height: 150,
-              width: double.infinity,
-              child: Text('Estatistica aqui tbm'),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-            SizedBox(height: 15),
-            Container(
-              height: 150,
-              width: double.infinity,
-              child: Text('eu não gosto de padding, padding não gosta de mim'),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.grey,

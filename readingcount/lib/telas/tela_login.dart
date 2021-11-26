@@ -53,89 +53,85 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Reading Count'),
-          backgroundColor: Colors.purple.shade200,
-        ),
         body: SafeArea(
             child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'LOGIN',
-                  style: TextStyle(
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.purple.shade200,
-                  ),
-                ),
-                const SizedBox(
-                  height: 100,
-                ),
-                TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                  ),
-                  controller: _emailController,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextField(
-                  controller: _senhaController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Senha',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 80,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Provider.of<LoginManager>(context, listen: false).login(
-                      _emailController.text,
-                      _senhaController.text,
-                    );
-                  },
-                  child: const Text('Login'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.purple.shade200,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 100,
-                      vertical: 15,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Provider.of<LoginManager>(context, listen: false)
-                        .irParaCadastro();
-                  },
-                  child: const Text('Cadastro'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    onPrimary: Colors.purple.shade200,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 100,
-                      vertical: 15,
-                    ),
-                  ),
-                ),
-              ],
+      width: double.infinity,
+      height: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Login',
+              style: TextStyle(
+                fontSize: 50.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.purple.shade200,
+              ),
             ),
-          ),
-        )));
+            const SizedBox(
+              height: 100,
+            ),
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+              ),
+              controller: _emailController,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            TextField(
+              controller: _senhaController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Senha',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(
+              height: 80,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Provider.of<LoginManager>(context, listen: false).login(
+                  _emailController.text,
+                  _senhaController.text,
+                );
+              },
+              child: const Text('Login'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.purple.shade200,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 100,
+                  vertical: 15,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Provider.of<LoginManager>(context, listen: false)
+                    .irParaCadastro();
+              },
+              child: const Text('Cadastro'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                onPrimary: Colors.purple.shade200,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 100,
+                  vertical: 15,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    )));
   }
 }
