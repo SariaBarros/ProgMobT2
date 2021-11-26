@@ -10,52 +10,54 @@ class TelaHome extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginManager = Provider.of<LoginManager>(context);
 
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SizedBox(height: 64.0),
-          _buildGreeting(loginManager.usuario),
-          const SizedBox(
-            height: 40,
-          ),
-          const Text(
-            'Selecione o livro que você vai ler :)',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+    return ListView(children: [
+      Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: 64.0),
+            _buildGreeting(loginManager.usuario),
+            const SizedBox(
+              height: 40,
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            height: 100,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              separatorBuilder: (context, _) => const SizedBox(
-                width: 8,
+            const Text(
+              'Selecione o livro que você vai ler :)',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
               ),
-              itemBuilder: (context, index) => buildCard(),
             ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          buildTemporizador(),
-          const SizedBox(height: 50.0),
-          OutlinedButton(
-            child: const Text("Logout"),
-            onPressed: () {
-              Provider.of<LoginManager>(context, listen: false).logout();
-            },
-          ),
-        ],
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 100,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                separatorBuilder: (context, _) => const SizedBox(
+                  width: 8,
+                ),
+                itemBuilder: (context, index) => buildCard(),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            buildTemporizador(),
+            const SizedBox(height: 50.0),
+            OutlinedButton(
+              child: const Text("Logout"),
+              onPressed: () {
+                Provider.of<LoginManager>(context, listen: false).logout();
+              },
+            ),
+          ],
+        ),
       ),
-    );
+    ]);
   }
 
   Widget buildCard() => Container(
