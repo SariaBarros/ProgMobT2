@@ -12,6 +12,7 @@ class LoginManager extends ChangeNotifier {
 
   bool get logado => _auth.currentUser != null;
   bool get tocouCadastro => _tocouCadastro;
+
   Usuario? get usuario {
     if (_usuario == null && _auth.currentUser != null) {
       _carregarUsuario();
@@ -37,6 +38,7 @@ class LoginManager extends ChangeNotifier {
 
       _criarUsuario(nome);
       _carregarUsuario();
+      _tocouCadastro = false;
     } on FirebaseAuthException catch (e) {
       print(e);
     } catch (e) {
